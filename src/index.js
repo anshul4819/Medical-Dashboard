@@ -1,17 +1,23 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import './index.css';
-import App from './App';
-import reportWebVitals from './reportWebVitals';
+import Apps from './components/Apps';
+import {Route, BrowserRouter, Routes} from 'react-router-dom';
+import Profile from "./components/Profile";
+import Navigationbar from './components/Navbar';
+import FileUploadComponent from './components/FileUploadComponent';
+import AnalysisComponent from './components/Analysis';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
-root.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>
-);
 
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
-reportWebVitals();
+root.render(
+  <BrowserRouter>
+    <Navigationbar/>
+    <Routes>
+      
+      <Route path="/" element={<Apps />} />
+      <Route path="profile" element={<Profile />} />
+      <Route path="fileupload" element={<FileUploadComponent />} /> 
+      <Route path="analysis" element={<AnalysisComponent />} /> 
+    </Routes>  
+  </BrowserRouter>
+);
