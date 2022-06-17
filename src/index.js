@@ -6,6 +6,8 @@ import Profile from "./components/Profile";
 import FileUploadComponent from './components/FileUploadComponent';
 import AnalysisComponent from './components/Analysis';
 import Login from './components/Login'
+import Uploaded from './components/FileUploaded';
+
 const root = ReactDOM.createRoot(document.getElementById('root'));
 
 root.render(
@@ -16,6 +18,8 @@ root.render(
       <Route path="profile" element={<Profile />} />
       <Route path="fileupload" element={<FileUploadComponent />} /> 
       <Route path="analysis" element={<AnalysisComponent />} /> 
+      <Route path="fileuploaded" element={<Uploaded />} /> 
+
     </Routes>  
   </BrowserRouter>
 );

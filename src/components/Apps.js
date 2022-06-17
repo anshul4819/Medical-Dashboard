@@ -11,9 +11,9 @@ class Apps extends Component {
         return (
             <div>
                 <Navigationbar />
-                <div className='abc'>
+                <div style={{display:"flex"}}>
                     <Sidebar/>
-                    <div className='def'></div>
+                    <div className='def'>dsjfos</div>
                 </div>
             </div>
         );

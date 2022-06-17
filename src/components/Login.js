@@ -68,9 +68,6 @@ class Login extends Component {
               </Container>
             </Navbar>
 
-
-
-
             <form onSubmit = {this.onSubmit} action="action_page.php" style={{flex:'2', border:'1px solid #ccc'}}>
                 <div className="container">
                 <br/>
@@ -79,25 +76,25 @@ class Login extends Component {
                 <p>Please fill in this form to create an account.</p>
                 <hr/>
 
-                <label for="name"><b>Name</b></label>
+                <label htmlFor='name'><b>Name</b></label>
                 <input type="text" placeholder="Enter Name" value={this.state.name} onChange={this.onChangeName} name="name" required/>
 
-                <label for="email"><b>Email</b></label>
+                <label htmlFor="email"><b>Email</b></label>
                 <input type="text" placeholder="Enter Email" name="email" value={this.state.email} onChange={this.onChangeEmail} required/>
                 
-                <label for="psw"><b>Password</b></label>
+                <label htmlFor="psw"><b>Password</b></label>
                 <input type="password" placeholder="Enter Password" name="psw" value={this.state.psw} onChange={this.onChangePassword} required/>
             
-                <label for="psw-repeat"><b>Repeat Password</b></label>
+                <label htmlFor="psw-repeat"><b>Repeat Password</b></label>
                 <input type="password" placeholder="Repeat Password" name="psw-repeat" required/>
             
                 <label>
-                    <input type="checkbox" checked="checked" name="remember" style={{marginBottom:'15px'}}/> Remember me
+                    <input type="checkbox" name="remember" style={{marginBottom:'15px'}}/> Remember me
                 </label>
 
-                <div class="clearfix">
-                    <button type="button" class="cancelbtn">Cancel</button>
-                    <Link to="/apps"><button type="submit"  class="signupbtn" >Sign Up</button></Link>
+                <div className="clearfix">
+                    <button type="button" className="cancelbtn">Cancel</button>
+                    <Link to="/apps"><button type="submit"  className="signupbtn" >Sign Up</button></Link>
                 </div>
                 </div>
             </form>

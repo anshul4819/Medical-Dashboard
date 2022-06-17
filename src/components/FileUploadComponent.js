@@ -3,6 +3,7 @@ import axios from 'axios';
 import "./FileUploadComponent.css";
 import Navigationbar from './Navbar';
 import Sidebar from './Sidebar';
+import { Link } from 'react-router-dom';
 
 export default class FileUploadComponent extends Component {
  
@@ -30,35 +31,36 @@ export default class FileUploadComponent extends Component {
           console.log(res)
       })
   }
-
-
- 
   render() {
     return (
-      
       <>
         <Navigationbar/>
-        <Sidebar/>
-        <div className="container">
-          
-          <div>
+        <div style={{display:"flex"}}>
+          <Sidebar/>
+          <div style={{paddingRight:"250px",flex:"4"}}>
             <br/><br/>
-            <h3>Upload your genetic data JSON file here</h3>
-          </div>
-          <hr/>
-          <div style={{marginTop:'40px'}}>
-          <div className="col-md-4 offset-md-4">
-          <form onSubmit={this.onSubmit}>
-              <div className="form-group">
-                  <input type="file" onChange={this.onFileChange} />
+            <h3 style={{textAlign:"center"}}>Upload your genetic data JSON file here</h3>
+            <hr/>
+            <div style={{marginTop:'40px'}}>
+
+              <div className="col-md-4 offset-md-4">
+
+                <form onSubmit={this.onSubmit}>
+                  <div className="form-group">
+                      <input type="file" onChange={this.onFileChange} />
+                  </div>
+                  <div className="form-group">
+                      <Link to="/fileuploaded"><button className="button button1" type="submit">Upload</button></Link>
+                  </div>
+                </form>
+
               </div>
-              <div className="form-group">
-                  <button className="button button1" type="submit">Upload</button>
-              </div>
-            </form>
-          </div>
+
+            </div>
           </div>
         </div>
+        
+        
       </>
     )
   }

@@ -1,9 +1,8 @@
 
 .form-box{
-    min-width: 100%;
+    min-width: 50%;
     height: 100vh;
     background-color: skyblue;
-    /* border: dotted #F55A00 5vw; */
     margin: 0vw;
     padding: 5vw ;
     position:relative; 
@@ -25,11 +24,11 @@
     width: 100%;
     padding: .5rem .8rem .5rem .8rem;
     margin: .9vw 0 ;
-    border:0;
+    border:4px;
     border-radius: 5px;
     font-size: 20px;
 }
 
 .form-box textarea{
-    height: 15vh;
+    height: 10vh;
 }

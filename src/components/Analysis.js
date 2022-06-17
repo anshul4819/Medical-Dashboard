@@ -13,16 +13,16 @@ class Analysis extends Component {
         return(
             <>
                 <Navigationbar/>
-                <Sidebar/>
-                <div style={{textAlign:"center"}}>
-                    
-                    <br/> <br/>
-                    <h2>
-                        This is the analysis of your genetic data.
-                    </h2>
-                </div>  
+                <div style={{display:"flex"}}>
+                    <Sidebar/>
+                    <div style={{paddingLeft:"215px",flex:"4"}}>
+                        <br/> <br/>
+                        <h2>
+                            This is the analysis of your genetic data.
+                        </h2>
+                    </div>
+                </div>
             </>
-            
         );
     };
 }

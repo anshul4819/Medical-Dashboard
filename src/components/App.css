@@ -1,7 +1,3 @@
-.abc{
-  display:flex;
-}
 .def{
-  flex:4;
-  /* background-color: blue; */
+  flex:5;
 }
