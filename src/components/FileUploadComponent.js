@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import "./FileUploadComponent.css";
+import Navigationbar from './Navbar';
+import Sidebar from './Sidebar';
 
 export default class FileUploadComponent extends Component {
  
@@ -33,25 +35,31 @@ export default class FileUploadComponent extends Component {
  
   render() {
     return (
-      <div className="container">
-        <div style={{textAlign:"center"}}>
-          <br/><br/>
-          <h3>Upload your genetic data JSON file here</h3>
+      
+      <>
+        <Navigationbar/>
+        <Sidebar/>
+        <div className="container">
+          
+          <div>
+            <br/><br/>
+            <h3>Upload your genetic data JSON file here</h3>
+          </div>
+          <hr/>
+          <div style={{marginTop:'40px'}}>
+          <div className="col-md-4 offset-md-4">
+          <form onSubmit={this.onSubmit}>
+              <div className="form-group">
+                  <input type="file" onChange={this.onFileChange} />
+              </div>
+              <div className="form-group">
+                  <button className="button button1" type="submit">Upload</button>
+              </div>
+            </form>
+          </div>
+          </div>
         </div>
-        <hr/>
-        <div style={{marginTop:'40px'}}>
-        <div className="col-md-4 offset-md-4">
-        <form onSubmit={this.onSubmit}>
-            <div className="form-group">
-                <input type="file" onChange={this.onFileChange} />
-            </div>
-            <div className="form-group">
-                <button className="button button1" type="submit">Upload</button>
-            </div>
-          </form>
-        </div>
-        </div>
-      </div>
+      </>
     )
   }
 }

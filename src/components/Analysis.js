@@ -1,4 +1,6 @@
 import React, {Component} from "react";
+import Navigationbar from './Navbar';
+import Sidebar from './Sidebar';
 
 class Analysis extends Component {
     componentDidMount() {
@@ -9,12 +11,17 @@ class Analysis extends Component {
     }
     render(){
         return(
-            <div style={{textAlign:"center"}}>
-                <br/> <br/>
-                <h2>
-                    This is the analysis of your genetic data.
-                </h2>
-            </div>  
+            <>
+                <Navigationbar/>
+                <Sidebar/>
+                <div style={{textAlign:"center"}}>
+                    
+                    <br/> <br/>
+                    <h2>
+                        This is the analysis of your genetic data.
+                    </h2>
+                </div>  
+            </>
             
         );
     };
