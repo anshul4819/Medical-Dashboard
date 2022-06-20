@@ -8,7 +8,7 @@ function Uploaded(){
             <Navigationbar/>
             <div style={{display:"flex"}}>
                 <Sidebar/>
-                <div style={{paddingLeft:"300px",flex:"4"}}>
+                <div style={{paddingLeft:"300px",flex:"5"}}>
                     <br/><br/>
                     <h2> Your file has been uploaded. </h2>
                 </div>
