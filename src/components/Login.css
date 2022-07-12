@@ -66,9 +66,10 @@
     color: white;
     padding: 14px 20px;
     margin: 8px 0;
-    border: none;
+    border:#282c34;
     cursor: pointer;
-    width: 100%;
+    
+    width: 30%;
     opacity: 0.9;
   }
   

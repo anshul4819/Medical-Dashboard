@@ -1,106 +1,126 @@
 import React, { Component } from 'react';
 import './Login.css';
-import {Container, Navbar} from 'react-bootstrap';
-import {Link} from "react-router-dom"
-class Login extends Component {
-    userData;
-    constructor(props){
-        super(props);
-        this.onChangeName = this.onChangeName.bind(this);
-        this.onChangeEmail = this.onChangeEmail.bind(this);
-        this.onChangePassword = this.onChangePassword.bind(this);
-        this.onSubmit = this.onSubmit.bind(this);
-        this.state = {
-            name: '',
-            email: '',
-            psw: ''
-        }
-    }
-    // Form Events
-    onChangeName(e) {
-        this.setState({ name: e.target.value })
-    }
-    onChangeEmail(e) {
-        this.setState({ email: e.target.value })
-    }
-    onChangePassword(e) {
-        this.setState({ psw: e.target.value })
-    }
-    onSubmit(e) {
-        // const navigate = useNavigate();
-        e.preventDefault()
-        this.setItem({
-            name: '',
-            email: '',
-            psw: ''
-        })
-        // navigate('/fileupload');
+import { useState } from "react";
+import { useEffect } from 'react';
+import {Container, Navbar, NavLink} from 'react-bootstrap';
+import jwt_decode from 'jwt-decode';
+import {useNavigate} from 'react-router-dom';
+function Login () {
 
-    }
-    // React Life Cycle
-    componentDidMount() {
-        
-        this.userData = JSON.parse(localStorage.getItem('user'));
-        if (localStorage.getItem('user')) {
-            this.setState({
-                name: this.userData.name,
-                email: this.userData.email,
-                psw: this.userData.psw,
-            })
-        } 
-        else {
-            this.setState({
-                name: '',
-                email: '',
-                psw: ''
-            })
+  const [name,setName] = useState("");
+  const [email,setEmail] = useState("");
+  const [pwd,setPwd] = useState("");
+  const [message, setMessage] = useState("");
+
+  const navigate = useNavigate();
+
+  let handleSubmit = async (e) => {
+      e.preventDefault();
+      try {
+        let res = await fetch("https://localhost:9443/upload/metadata", {
+          method: "POST",
+          body: JSON.stringify({
+            name: name,
+            email: email,
+            pwd: pwd,
+          }),
+        });
+      //   let resJson = await res.json();
+        if (res.status === 200) {
+          setName("");
+          setEmail("");
+          setPwd("");
+          setMessage("User created successfully");
+          console.log("Everything ok");
+        } else {
+          setMessage("Some error occured");
         }
+      } catch(err) {
+          console.log(err);
+      }
+      navigate('/apps');
+  };
+
+
+
+
+    const [user,setUser]=useState({});
+    function handleCallbackResponse(response){
+      console.log("Encoded JWT ID token: " + response.credential);
+      var userObject=jwt_decode(response.credential);
+      console.log(userObject);
+      localStorage.setItem('username',userObject.name);
+      setUser(userObject);
+      document.getElementById("signInDiv").hidden = true;
+      navigate('/apps');
     }
-    componentWillUpdate(nextProps, nextState) {
-        localStorage.setItem('user', JSON.stringify(nextState));
-    }
-    render(){
+
+    // function handleSignOut(event) {
+    //   setUser({});
+    //   document.getElementById("signInDiv").hidden = false;
+    // }
+
+    useEffect(() => {
+      /*global google*/
+      google.accounts.id.initialize({
+        client_id: "987058352864-gomgclesvtprf6uq5hdtvr9f82p5eskj.apps.googleusercontent.com",
+        callback: handleCallbackResponse
+      });
+      google.accounts.id.renderButton(
+        document.getElementById("signInDiv"),
+        {theme : "outline", size: "large"}
+      );
+      google.accounts.id.prompt();
+    }, []);
+    
+    
+    // render(){
+
         return (
             <>
-            <Navbar bg="dark" variant="dark">
-              <Container>
-                <Navbar.Brand href="/">geneone.AI</Navbar.Brand>
-              </Container>
-            </Navbar>
-
-            <form onSubmit = {this.onSubmit} action="action_page.php" style={{flex:'2', border:'1px solid #ccc'}}>
-                <div className="container">
+                <Navbar bg="dark" variant="dark">
+                  <Container>
+                    <Navbar.Brand href="/">geneone.AI</Navbar.Brand>
+                  </Container>
+                </Navbar>
                 <br/>
-                <br/>
-                <h1>Sign Up</h1>
-                <p>Please fill in this form to create an account.</p>
-                <hr/>
+                <div id="signInDiv"></div>
 
-                <label htmlFor='name'><b>Name</b></label>
-                <input type="text" placeholder="Enter Name" value={this.state.name} onChange={this.onChangeName} name="name" required/>
-
-                <label htmlFor="email"><b>Email</b></label>
-                <input type="text" placeholder="Enter Email" name="email" value={this.state.email} onChange={this.onChangeEmail} required/>
-                
-                <label htmlFor="psw"><b>Password</b></label>
-                <input type="password" placeholder="Enter Password" name="psw" value={this.state.psw} onChange={this.onChangePassword} required/>
-            
-                <label htmlFor="psw-repeat"><b>Repeat Password</b></label>
-                <input type="password" placeholder="Repeat Password" name="psw-repeat" required/>
-            
-                <label>
-                    <input type="checkbox" name="remember" style={{marginBottom:'15px'}}/> Remember me
-                </label>
-
-                <div className="clearfix">
-                    <button type="button" className="cancelbtn">Cancel</button>
-                    <Link to="/apps"><button type="submit"  className="signupbtn" >Sign Up</button></Link>
+                {/* {  Object.keys(user).length != 0 &&
+                  <button onClick={(e)=>handleSignOut(e)}>Sign Out</button>
+                } */}
+                <div>
+                  <form onSubmit={handleSubmit}>
+                      <label> <h1>Customer Info</h1> </label>
+                      <input 
+                          type="text" 
+                          value={name}
+                          placeholder="Name"
+                          onChange={(e)=>setName(e.target.value)}
+                      />
+                      <input 
+                          type="text" 
+                          value={email}
+                          placeholder="Email"
+                          onChange={(e)=>setEmail(e.target.value)}
+                      />
+                      <input 
+                          type="text" 
+                          value={pwd}
+                          placeholder="Password"
+                          onChange={(e)=>setPwd(e.target.value)}
+                      />
+                      <input 
+                          type="text" 
+                          placeholder="Repeat Password"
+                      />
+                      <button type = "submit"> submit</button>
+                      <div className="message">{message ? <p>{message}</p> : null}</div>
+                  </form>
                 </div>
-                </div>
-            </form>
             </>
         );
-    }
+    // }
     
 }
 
