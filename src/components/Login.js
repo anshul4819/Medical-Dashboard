@@ -5,6 +5,9 @@ import { useEffect } from 'react';
 import {Container, Navbar, NavLink} from 'react-bootstrap';
 import jwt_decode from 'jwt-decode';
 import {useNavigate} from 'react-router-dom';
+import {Link} from "react-router-dom";
+
+
 function Login () {
 
   const [name,setName] = useState("");
@@ -13,9 +16,10 @@ function Login () {
   const [message, setMessage] = useState("");
 
   const navigate = useNavigate();
-
+  
   let handleSubmit = async (e) => {
       e.preventDefault();
+      localStorage.setItem("abc",name);
       try {
         let res = await fetch("https://localhost:9443/upload/metadata", {
           method: "POST",
@@ -25,7 +29,6 @@ function Login () {
             pwd: pwd,
           }),
         });
-      //   let resJson = await res.json();
         if (res.status === 200) {
           setName("");
           setEmail("");
@@ -35,10 +38,11 @@ function Login () {
         } else {
           setMessage("Some error occured");
         }
+        
       } catch(err) {
           console.log(err);
       }
-      navigate('/apps');
+      navigate('/OTP');
   };
 
 
@@ -52,6 +56,9 @@ function Login () {
       localStorage.setItem('username',userObject.name);
       setUser(userObject);
       document.getElementById("signInDiv").hidden = true;
+      // post(e)=>
+      //   name: userObject.name
+      //   email: userObject.email
       navigate('/apps');
     }
 
@@ -68,7 +75,7 @@ function Login () {
       });
       google.accounts.id.renderButton(
         document.getElementById("signInDiv"),
-        {theme : "outline", size: "large"}
+        {theme : "outline", size: "large", textAlign: "center"}
       );
       google.accounts.id.prompt();
     }, []);
@@ -85,38 +92,39 @@ function Login () {
                 </Navbar>
                 <br/>
                 <div id="signInDiv"></div>
-
-                {/* {  Object.keys(user).length != 0 &&
-                  <button onClick={(e)=>handleSignOut(e)}>Sign Out</button>
-                } */}
-                <div>
-                  <form onSubmit={handleSubmit}>
-                      <label> <h1>Customer Info</h1> </label>
-                      <input 
+                
+                <div style={{textAlign:"center"}}>
+                  <form className="input" onSubmit={handleSubmit}>
+                      <label> <h1>Sign Up</h1> </label>
+                      <br/>
+                      <input
                           type="text" 
                           value={name}
                           placeholder="Name"
                           onChange={(e)=>setName(e.target.value)}
-                      />
+                      /><br/>
                       <input 
                           type="text" 
                           value={email}
                           placeholder="Email"
                           onChange={(e)=>setEmail(e.target.value)}
-                      />
+                      /><br/>
                       <input 
-                          type="text" 
+                          type="password" 
                           value={pwd}
                           placeholder="Password"
                           onChange={(e)=>setPwd(e.target.value)}
-                      />
+                      /><br/>
                       <input 
-                          type="text" 
+                          type="password" 
                           placeholder="Repeat Password"
-                      />
-                      <button type = "submit"> submit</button>
+                      /><br/>
+                      <button type = "submit"> Sign Up</button>
                       <div className="message">{message ? <p>{message}</p> : null}</div>
                   </form>
+                  Already have an account?
+                  <br/>
+                  <Link to="/loginpage"> <button> Login </button> </Link>
                 </div>
             </>
         );

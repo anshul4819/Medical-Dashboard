@@ -1,3 +1,6 @@
+input {
+  width: 50%;
+}
 .App {
     text-align: center;
   }
@@ -42,7 +45,7 @@
   
   /* Full-width input fields */
     input[type=text], input[type=password] {
-    width: 100%;
+    width: 40%;
     padding: 15px;
     margin: 5px 0 22px 0;
     display: inline-block;
@@ -64,12 +67,12 @@
   button {
     background-color: #04AA6D;
     color: white;
-    padding: 14px 20px;
-    margin: 8px 0;
-    border:#282c34;
+    padding: 8px 10px;
+    margin: 7px 0;
+    border:#2da472;
     cursor: pointer;
     
-    width: 30%;
+    width: 25%;
     opacity: 0.9;
   }
   
@@ -99,11 +102,4 @@
     content: "";
     clear: both;
     display: table;
-  }
-  
-  /* Change styles for cancel button and signup button on extra small screens */
-  @media screen and (max-width: 300px) {
-    .cancelbtn, .signupbtn {
-      width: 100%;
-    }
   }

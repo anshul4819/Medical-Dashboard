@@ -7,6 +7,8 @@ import FileUploadComponent from './components/FileUploadComponent';
 import AnalysisComponent from './components/Analysis';
 import Login from './components/Login'
 import Uploaded from './components/FileUploaded';
+import LoginPage from './components/LoginPage';
+import OTP from './components/OTP';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 
@@ -19,7 +21,8 @@ root.render(
       <Route path="fileupload" element={<FileUploadComponent />} /> 
       <Route path="analysis" element={<AnalysisComponent />} /> 
       <Route path="fileuploaded" element={<Uploaded />} /> 
-
+      <Route path="loginpage" element={<LoginPage />} /> 
+      <Route path="OTP" element={<OTP />} /> 
     </Routes>  
   </BrowserRouter>
 );
